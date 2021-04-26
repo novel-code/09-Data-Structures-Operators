@@ -837,6 +837,7 @@ checkBaggage('Socks and camera');
 checkBaggage('Got some snacks and a gun for protection');
 */
 // strings p-3 LEC 122
+/*
 // Split and Join
 console.log('a+very+nice+string'.split('+'));
 console.log('Syed Muzzammil'.split(' '));
@@ -886,3 +887,72 @@ const planesInLine = function (n) {
 planesInLine(5);
 planesInLine(3);
 planesInLine(12);
+*/
+////////////////////// CODING CHALLENGE 4 LEC 123
+// Write a program that receives a list of variable names written in underscore_case
+// and convert them to camelCase.
+// The input will come from a textarea inserted into the DOM (see code below to
+// insert the elements), and conversion will happen when the button is pressed.
+// Test data (pasted to textarea, including spaces):
+// underscore_case
+// first_name
+// Some_Variable
+// calculate_AGE
+// delayed_departure
+// Should produce this output (5 separate console.log outputs):
+// underscoreCase ✅
+// firstName ✅✅
+// someVariable ✅✅✅
+// calculateAge ✅✅✅✅
+// delayedDeparture ✅✅✅✅✅
+/*
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+
+document.querySelector('button').addEventListener('click', function () {
+  const textAll = document.querySelector('textarea').value;
+  const textSeperated = textAll.split('\n');
+  let text = textSeperated[0];
+  for (const element of textSeperated) {
+    text = element;
+    const lower = text.toLocaleLowerCase();
+    const firstLetters = lower.slice(0, lower.indexOf('_'));
+
+    const middleLetter = lower
+      .slice(lower.indexOf('_') + 1, lower.indexOf('_') + 2)
+      .toUpperCase();
+    const lastLetters = lower.slice(lower.indexOf('_') + 2);
+    const camelCase = (firstLetters + middleLetter + lastLetters).replaceAll(
+      ' ',
+      ''
+    );
+    console.log(camelCase);
+  }
+});
+*/
+// Jonas method
+
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+
+document.querySelector('button').addEventListener('click', function () {
+  const text = document.querySelector('textarea').value;
+  const rows = text.split('\n');
+  for (const [i, row] of rows.entries()) {
+    const [first, second] = row.toLocaleLowerCase().trim().split('_');
+
+    const output = `${first}${second.replace(
+      second[0],
+      second[0].toUpperCase()
+    )}`;
+    console.log(`${output.padEnd(20)}${'✅'.repeat(i + 1)}`);
+  }
+});
+
+/* ---> underscoreCase
+ underscore_case 
+   first_name
+  Some_Variable
+calculate_AGE
+ delayed_departure
+*/
